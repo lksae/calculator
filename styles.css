@@ -9,10 +9,10 @@ body {
     border: black 2px solid;
     padding: 1.5px;
     margin-top: 200px;;
-    width: 240px;
-    height: 300px;
+    width: 247px;
+    height: 307px;
     justify-content: center;
-    
+    gap: 2px;
 }
 
 .first-row {
@@ -22,17 +22,13 @@ body {
 
 .row {
     display: flex;
-    
+    gap: 2px;
 }
 
 button {
     height: 60px;
     width: 60px;
     border-radius: 25%;
-    font-size: 20px;
-}
-
-p {
     font-size: 20px;
 }
 
@@ -46,5 +42,9 @@ p {
 
 #display {
     flex-grow: 3;
-    border: black 2px solid;
+    border: black 1px solid;
+    font-size: 25px;    
+    margin: 2px;
+    text-align: end;
+    padding: 12px 0;
 }
