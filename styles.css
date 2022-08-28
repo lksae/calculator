@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.calculator-body {
+    display: flex;
+    flex-direction: column;
+    border: black 2px solid;
+    padding: 1.5px;
+    margin-top: 200px;;
+    width: 240px;
+    height: 300px;
+    justify-content: center;
+    
+}
+
+.first-row {
+    display: flex;
+    
+}
+
+.row {
+    display: flex;
+    
+}
+
+button {
+    height: 60px;
+    width: 60px;
+    border-radius: 25%;
+    font-size: 20px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.operator {
+    background-color: cadetblue;
+}
+
+.clear {
+    background-color:steelblue;
+}
+
+#display {
+    flex-grow: 3;
+    border: black 2px solid;
+}
