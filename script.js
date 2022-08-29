@@ -58,6 +58,15 @@ function getAllNumbers() {
             if (n.target.innerHTML == ".") {
                 document.getElementById("dot").disabled = true;
             }
+
+            if (n.target.innerHTML ==  0 && operation == "divide") {
+                alert("You are not allowed to divide by zero!");
+                displayValue = 0;
+                document.getElementById("dot").disabled = false;
+                firstOperand = 0;
+                secondOperand = 0;
+                operation = "";
+            }
             
             
         });
