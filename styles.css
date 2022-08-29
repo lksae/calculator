@@ -17,9 +17,11 @@ body {
 
 .first-row {
     display: flex;
-    
 }
 
+#noShrink {
+    flex-shrink: 0;
+}
 .row {
     display: flex;
     gap: 2px;
@@ -47,4 +49,5 @@ button {
     margin: 2px;
     text-align: end;
     padding: 12px 0;
+    max-width: 181px;
 }

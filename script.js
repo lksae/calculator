@@ -1,4 +1,7 @@
 let displayValue = 0;
+let firstOperand = 0;
+let secondOperand = 0;
+let operation = "";
 
 function add(number1, number2) {
     return number1 + number2
@@ -48,6 +51,10 @@ function getAllNumbers() {
             }
             
             changeDisplayValue(displayValue);
+
+            if (n.target.innerHTML == ".") {
+                document.getElementById("dot").disabled = true;
+            }
             
             
         });
@@ -58,6 +65,7 @@ function getAllNumbers() {
 function changeDisplayValue(number) {
     const display = document.querySelector('#display');
     display.textContent = number;
+
 }
 
 function setClear() {
@@ -65,7 +73,17 @@ function setClear() {
     clear.addEventListener('click',function() {
         changeDisplayValue(0);
         displayValue = 0;
+        document.getElementById("dot").disabled = false;
+        firstOperand = 0;
+        secondOperand = 0;
     })
+}
+
+function handleOperatorStuff(operationStuff) {
+    operation = operationStuff;
+    changeDisplayValue(0);
+    displayValue = 0;
+    document.getElementById("dot").disabled = false;
 }
 
 function addEventListenerAtOperators(){
@@ -73,11 +91,61 @@ function addEventListenerAtOperators(){
     operators.forEach(function(operator) {
         operator.addEventListener('click', function(o) {
             if (o.target.innerHTML == "=") {
-                alert("=");
+                if (operation != "") {
+                    secondOperand = displayValue;
+                    /*console.log("second");
+                    console.log(secondOperand);
+                    if (secondOperand != 0) {
+                        secondOperand = displayValue;
+                        console.log("something")
+                    }*/
+                    let result = operate(operation, parseFloat(firstOperand), parseFloat(secondOperand));
+                    changeDisplayValue(result);
+                    displayValue = result;
+                    firstOperand = result;
+                    operation = "";
+                    document.getElementById("dot").disabled = false;
+                    secondOperand = 0;
+                }
+                
+            } else {
+                if (firstOperand == 0) {
+                    firstOperand = displayValue;
+                } else if (secondOperand == 0) {
+                    secondOperand = displayValue;
+                }
+                switch (o.target.innerHTML) {
+                    case "+":
+                        handleOperatorStuff("add");
+                    break;
+                    case "-":
+                        handleOperatorStuff("substract");
+                        
+                    break;
+                    case "x":
+                        handleOperatorStuff("multiply");
+                        
+                    break;
+                    case "/":
+                        handleOperatorStuff("divide");
+                        
+                    break;
+                
+                    default:
+                        break;
+                }
             }
+            /*console.log("first");
+            
+            console.log(firstOperand);
+            console.log("second");
+            console.log(secondOperand);*/
         })
     })
 }
+
+
+
 getAllNumbers()
 setClear()
 addEventListenerAtOperators()
