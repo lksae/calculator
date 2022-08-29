@@ -44,6 +44,9 @@ function getAllNumbers() {
 
     numbers.forEach(function(number) {
         number.addEventListener('click', function(n) {
+            if (operation != "") {
+                displayValue = 0;
+            }
             if(displayValue == 0) {
                 displayValue = n.target.innerHTML;
             } else {
@@ -80,43 +83,56 @@ function setClear() {
 }
 
 function handleOperatorStuff(operationStuff) {
+    if (operation != "") {
+        calculateResult();
+    } else {
+        
+        changeDisplayValue(0);
+        displayValue = 0;
+        document.getElementById("dot").disabled = false;
+    }
     operation = operationStuff;
-    changeDisplayValue(0);
-    displayValue = 0;
-    document.getElementById("dot").disabled = false;
+    //calculateResult();
+    
 }
 
+function calculateResult() {
+    secondOperand = displayValue;
+    let result = (operate(operation, parseFloat(firstOperand), parseFloat(secondOperand))).toFixed(2);
+    changeDisplayValue(result);
+    displayValue = result;
+    firstOperand = result;
+    operation = "";
+    document.getElementById("dot").disabled = false;
+    secondOperand = 0;
+}
 function addEventListenerAtOperators(){
     const operators = document.querySelectorAll('.operator');
     operators.forEach(function(operator) {
         operator.addEventListener('click', function(o) {
             if (o.target.innerHTML == "=") {
                 if (operation != "") {
-                    secondOperand = displayValue;
+                    
                     /*console.log("second");
                     console.log(secondOperand);
                     if (secondOperand != 0) {
                         secondOperand = displayValue;
                         console.log("something")
                     }*/
-                    let result = operate(operation, parseFloat(firstOperand), parseFloat(secondOperand));
-                    changeDisplayValue(result);
-                    displayValue = result;
-                    firstOperand = result;
-                    operation = "";
-                    document.getElementById("dot").disabled = false;
-                    secondOperand = 0;
+                    calculateResult()
                 }
                 
             } else {
                 if (firstOperand == 0) {
                     firstOperand = displayValue;
-                } else if (secondOperand == 0) {
+                } 
+                else if (secondOperand == 0) {
                     secondOperand = displayValue;
                 }
                 switch (o.target.innerHTML) {
                     case "+":
                         handleOperatorStuff("add");
+
                     break;
                     case "-":
                         handleOperatorStuff("substract");
@@ -135,11 +151,11 @@ function addEventListenerAtOperators(){
                         break;
                 }
             }
-            /*console.log("first");
+            console.log("first");
             
             console.log(firstOperand);
             console.log("second");
-            console.log(secondOperand);*/
+            console.log(secondOperand);
         })
     })
 }
